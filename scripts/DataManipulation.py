@@ -56,3 +56,5 @@ cols_at_least_one_na = titanic.dropna(axis=1, how='any')    # drop cols with at 
 cols_all_nas = titanic.dropna(axis=1, how='all')            # drop cols with all NA's
 
 cols_at_least_thresh = titanic.dropna(axis=1, thresh=100)   # drop cols with at least 100 Na's
+
+print('Heelo word')
