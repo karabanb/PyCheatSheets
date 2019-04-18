@@ -12,17 +12,20 @@ types = df.dtypes
 types.name = 'type'
 
 n_obs = len(df)
-nas_count = sum(df.isna()).rename('na_cnt')
-pct_nas = (nas_count/n_obs).rename('na_pct')
-n_unique = df.nunique().rename('n_unique')
+n_nas = np.sum(df.isna()).rename('n_nas')
+pct_nas = (n_nas/n_obs).rename('pct_nas')
 
+n_zeros = np.sum(df.apply(lambda x: x == 0)).rename('n_zeros')
+pct_zeros = (n_zeros/n_obs).rename('pct_zeros')
+
+n_distinct = df.nunique().rename('n_distinct')
 
 quantiles = df.describe().transpose().iloc[:, 1:]
 
-result = pd.concat([types, nas_count, pct_nas, n_unique, quantiles], axis=1, sort=False).sort_values(by='type')
+to_concat = [types, n_distinct, n_nas, pct_nas, n_zeros, pct_zeros]
 
+result = pd.concat(to_concat, axis=1).sort_values(by='type')
 
-df.apply(lambda x: pd.unique(x))
 
 
 
