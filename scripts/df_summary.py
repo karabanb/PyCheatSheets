@@ -1,14 +1,13 @@
-
 import pandas as pd
 import numpy as np
 
 df = pd.read_csv('/Users/bkaraban/PycharmProjects/PyCheatSheets/data/train.csv', index_col='PassengerId')
 
+
 # result = pd.DataFrame()
 
 
-def df_summary(df):
-
+def df_summary(df, quantiles=False):
     types = df.dtypes
     types.name = 'type'
 
@@ -21,8 +20,12 @@ def df_summary(df):
 
     n_distinct = df.nunique().rename('n_distinct')
 
-    quantiles = df.describe().transpose().iloc[:, 1:]
-
     to_concat = [types, n_distinct, n_nas, pct_nas, n_zeros, pct_zeros]
 
-    result = pd.concat(to_concat, axis=1).sort_values(by='type')
+    if quantiles == True:
+        quant = df.describe().transpose().iloc[:, 1:]
+        to_concat.append(quant)
+
+    result = pd.concat(to_concat, axis=1, sort=True).sort_values(by='type')
+
+    return result
