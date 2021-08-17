@@ -4,6 +4,7 @@ import pandas as pd
 path = '/Users/bkaraban/PycharmProjects/PyCheatSheets/data/train.csv'
 titanic = pd.read_csv(path, index_col='PassengerId')
 
+
 ########################################## SELECTING COLUMNS ###########################################################
 
 # single column
@@ -33,11 +34,13 @@ slice_from_left = titanic.loc[:, :'Sex']
 slice_from_right = titanic.loc[:, 'Sex':]
 slice_left_right = titanic.loc[:, 'Sex':'Ticket']
 
+
 ############################################# SELECTING ROWS ###########################################################
 
 first_few_rows = titanic[0:5]
 first_few_rows_loc = titanic.loc[0:5]
 first_few_rows_iloc = titanic.iloc[0:5]
+
 
 ############################################# FILTERING ROWS ###########################################################
 
